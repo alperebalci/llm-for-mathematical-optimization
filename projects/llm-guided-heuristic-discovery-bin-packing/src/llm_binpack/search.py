@@ -9,7 +9,6 @@ from .evaluator import Evaluation, evaluate_expression
 from .expressions import UnsafeExpression
 from .proposers import DeterministicProposer, Elite, Proposer
 
-
 SEED_EXPRESSIONS = (
     "-residual",
     "-(residual ** 2)",
@@ -119,7 +118,7 @@ class SearchEngine:
 
             try:
                 proposals = self.proposer.propose(elites, self.proposals_per_generation)
-            except Exception:
+            except Exception:  # noqa: BLE001 - untrusted provider failures must trigger fallback
                 proposals = []
 
             if len(proposals) < self.proposals_per_generation:

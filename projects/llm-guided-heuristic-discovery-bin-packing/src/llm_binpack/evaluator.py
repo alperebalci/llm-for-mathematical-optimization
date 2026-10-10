@@ -103,12 +103,8 @@ def evaluate_expression(
     complexity = expression_complexity(expression)
     mean_excess_ratio = fmean(row.excess_ratio for row in rows)
 
-    reference_gaps = [
-        row.reference_gap for row in rows if row.reference_gap is not None
-    ]
-    mean_reference_gap = (
-        fmean(reference_gaps) if reference_gaps else None
-    )
+    reference_gaps = [row.reference_gap for row in rows if row.reference_gap is not None]
+    mean_reference_gap = fmean(reference_gaps) if reference_gaps else None
 
     fitness = -mean_excess_ratio - complexity_penalty * complexity
 
@@ -133,16 +129,12 @@ def aggregate_by_family(evaluation: Evaluation) -> dict[str, dict[str, float | N
 
     for family in families:
         rows = [row for row in evaluation.cases if row.family == family]
-        reference_gaps = [
-            row.reference_gap for row in rows if row.reference_gap is not None
-        ]
+        reference_gaps = [row.reference_gap for row in rows if row.reference_gap is not None]
         result[family] = {
             "mean_bins": fmean(row.bins_used for row in rows),
             "mean_excess_ratio": fmean(row.excess_ratio for row in rows),
             "mean_best_fit_bins": fmean(row.best_fit_bins for row in rows),
-            "mean_reference_gap": (
-                fmean(reference_gaps) if reference_gaps else None
-            ),
+            "mean_reference_gap": (fmean(reference_gaps) if reference_gaps else None),
         }
 
     return result

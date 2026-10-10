@@ -2,7 +2,6 @@ import pytest
 
 from llm_binpack.orlib import ORLibraryFormatError, parse_orlib_text
 
-
 SAMPLE = """2
 u4_00
 10 4 2

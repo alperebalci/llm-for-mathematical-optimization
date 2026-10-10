@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -54,7 +55,7 @@ def download_text(filename: str) -> tuple[str, str]:
         try:
             with urllib.request.urlopen(url, timeout=45) as response:
                 return response.read().decode("utf-8"), url
-        except Exception as exc:
+        except (urllib.error.URLError, OSError, TimeoutError, UnicodeDecodeError) as exc:
             errors.append(f"{url}: {exc}")
     raise RuntimeError(f"could not download {filename}: " + " | ".join(errors))
 

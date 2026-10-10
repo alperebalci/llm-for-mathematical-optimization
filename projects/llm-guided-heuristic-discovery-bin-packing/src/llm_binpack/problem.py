@@ -2,10 +2,9 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from math import isfinite
-from collections.abc import Callable, Mapping
-
 
 ScoreFunction = Callable[[Mapping[str, float]], float]
 
@@ -25,9 +24,7 @@ class BinPackingInstance:
             raise ValueError("items must not be empty")
         for item in self.items:
             if not isfinite(item) or item <= 0 or item > self.capacity:
-                raise ValueError(
-                    f"item sizes must be finite and in (0, capacity]; got {item!r}"
-                )
+                raise ValueError(f"item sizes must be finite and in (0, capacity]; got {item!r}")
 
 
 @dataclass(frozen=True, slots=True)

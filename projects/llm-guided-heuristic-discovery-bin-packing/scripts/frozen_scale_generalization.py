@@ -15,10 +15,7 @@ from llm_binpack.evaluator import evaluate_expression
 from llm_binpack.orlib import parse_orlib_text
 from llm_binpack.paired import compare_to_best_fit
 
-
-FROZEN_EXPRESSION = (
-    "(2.0 + tightness) if residual < 0.25 * item else remaining / capacity"
-)
+FROZEN_EXPRESSION = "(2.0 + tightness) if residual < 0.25 * item else remaining / capacity"
 
 ORLIB_FILES = {
     "binpack2.txt": {

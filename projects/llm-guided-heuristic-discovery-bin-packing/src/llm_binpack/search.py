@@ -9,7 +9,6 @@ from .evaluator import Evaluation, evaluate_expression
 from .expressions import UnsafeExpression
 from .proposers import DeterministicProposer, Elite, Proposer
 
-
 SEED_EXPRESSIONS = (
     "-residual",
     "-(residual ** 2)",

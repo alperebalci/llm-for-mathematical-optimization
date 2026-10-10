@@ -14,7 +14,6 @@ from llm_binpack.paired import compare_to_best_fit
 from llm_binpack.proposers import DeterministicProposer, Elite
 from llm_binpack.search import SearchEngine
 
-
 ORLIB_URLS = {
     "binpack1.txt": "https://people.brunel.ac.uk/~mastjjb/jeb/orlib/files/binpack1.txt",
     "binpack2.txt": "https://people.brunel.ac.uk/~mastjjb/jeb/orlib/files/binpack2.txt",
@@ -62,8 +61,7 @@ def download_text(filename: str) -> tuple[str, str]:
 
 def select_on_validation(search, validation):
     scored = [
-        evaluate_expression(candidate.expression, validation)
-        for candidate in search.population
+        evaluate_expression(candidate.expression, validation) for candidate in search.population
     ]
     return max(scored, key=lambda result: result.fitness), scored
 

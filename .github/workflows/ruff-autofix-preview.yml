@@ -1,0 +1,23 @@
+name: Preview Ruff autofix for bin-packing research
+on:
+  push:
+    paths:
+      - ".github/workflows/ruff-autofix-preview.yml"
+permissions:
+  contents: read
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install ruff==0.16.9
+      - name: Show exact proposed style patch without writing repository
+        run: |
+          ruff check --fix projects/llm-guided-heuristic-discovery-bin-packing || true
+          ruff format projects/llm-guided-heuristic-discovery-bin-packing
+          echo "BEGIN_STYLE_PATCH"
+          git diff -- projects/llm-guided-heuristic-discovery-bin-packing
+          echo "END_STYLE_PATCH"

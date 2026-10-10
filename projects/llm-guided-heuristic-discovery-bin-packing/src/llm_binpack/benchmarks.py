@@ -27,8 +27,7 @@ def _uniform_items(rng: random.Random, n_items: int, capacity: float) -> tuple[f
 
 def _weibull_items(rng: random.Random, n_items: int, capacity: float) -> tuple[float, ...]:
     return tuple(
-        _clip_item(rng.weibullvariate(0.38 * capacity, 1.6), capacity)
-        for _ in range(n_items)
+        _clip_item(rng.weibullvariate(0.38 * capacity, 1.6), capacity) for _ in range(n_items)
     )
 
 

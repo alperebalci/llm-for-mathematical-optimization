@@ -174,7 +174,7 @@ Return ONLY a JSON array of strings.
 
         payload = json.loads(cleaned[start : end + 1])
         if not isinstance(payload, list):
-            raise ValueError("model output must be a JSON array")
+            raise TypeError("model output must be a JSON array")
 
         return [
             value.strip()

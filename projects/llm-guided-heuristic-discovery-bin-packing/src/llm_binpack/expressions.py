@@ -5,7 +5,7 @@ from __future__ import annotations
 import ast
 import math
 from dataclasses import dataclass
-from typing import Mapping
+from collections.abc import Mapping
 
 
 ALLOWED_VARIABLES = {

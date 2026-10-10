@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from math import isfinite
-from typing import Callable, Mapping
+from collections.abc import Callable, Mapping
 
 
 ScoreFunction = Callable[[Mapping[str, float]], float]

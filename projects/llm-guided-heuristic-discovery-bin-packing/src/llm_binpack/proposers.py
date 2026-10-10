@@ -34,9 +34,7 @@ class DeterministicProposer:
         # close a bin when the residual gap is small, otherwise preserve room.
         if self.rng.random() < 0.45:
             threshold = self.rng.choice([0.05, 0.10, 0.15, 0.20, 0.25, 0.30])
-            tight = self.rng.choice(
-                ["2.0 - residual", "1.0 + tightness", "2.0 + fill_ratio"]
-            )
+            tight = self.rng.choice(["2.0 - residual", "1.0 + tightness", "2.0 + fill_ratio"])
             loose = self.rng.choice(
                 [
                     "remaining",
@@ -45,10 +43,7 @@ class DeterministicProposer:
                     "-residual + 0.10 * fill_ratio",
                 ]
             )
-            return (
-                f"({tight}) if residual < ({threshold}) * capacity "
-                f"else ({loose})"
-            )
+            return f"({tight}) if residual < ({threshold}) * capacity else ({loose})"
 
         primary = self.rng.choice(
             [
@@ -70,9 +65,7 @@ class DeterministicProposer:
                 "residual",
             ]
         )
-        coefficient = self.rng.choice(
-            [-0.50, -0.25, -0.10, -0.05, 0.05, 0.10, 0.25, 0.50]
-        )
+        coefficient = self.rng.choice([-0.50, -0.25, -0.10, -0.05, 0.05, 0.10, 0.25, 0.50])
         return f"({primary}) + ({coefficient}) * ({secondary})"
 
     def _mutate_elite(self, expression: str) -> str:
@@ -174,13 +167,9 @@ Return ONLY a JSON array of strings.
 
         payload = json.loads(cleaned[start : end + 1])
         if not isinstance(payload, list):
-            raise ValueError("model output must be a JSON array")
+            raise TypeError("model output must be a JSON array")
 
-        return [
-            value.strip()
-            for value in payload
-            if isinstance(value, str) and value.strip()
-        ]
+        return [value.strip() for value in payload if isinstance(value, str) and value.strip()]
 
     def propose(self, elites: list[Elite], n: int) -> list[str]:
         response = self.client.responses.create(

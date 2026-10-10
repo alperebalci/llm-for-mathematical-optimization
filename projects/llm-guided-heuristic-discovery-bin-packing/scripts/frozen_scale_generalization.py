@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import urllib.error
 import urllib.request
 from pathlib import Path
 
@@ -14,10 +15,7 @@ from llm_binpack.evaluator import evaluate_expression
 from llm_binpack.orlib import parse_orlib_text
 from llm_binpack.paired import compare_to_best_fit
 
-
-FROZEN_EXPRESSION = (
-    "(2.0 + tightness) if residual < 0.25 * item else remaining / capacity"
-)
+FROZEN_EXPRESSION = "(2.0 + tightness) if residual < 0.25 * item else remaining / capacity"
 
 ORLIB_FILES = {
     "binpack2.txt": {
@@ -54,7 +52,7 @@ def download_text(filename: str) -> tuple[str, str]:
         try:
             with urllib.request.urlopen(url, timeout=45) as response:
                 return response.read().decode("utf-8"), url
-        except Exception as exc:
+        except (urllib.error.URLError, OSError, TimeoutError, UnicodeDecodeError) as exc:
             errors.append(f"{url}: {exc}")
     raise RuntimeError(f"could not download {filename}: " + " | ".join(errors))
 

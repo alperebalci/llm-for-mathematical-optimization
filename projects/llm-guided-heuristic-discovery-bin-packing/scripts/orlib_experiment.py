@@ -4,15 +4,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import urllib.error
 import urllib.request
 from pathlib import Path
 
-from llm_binpack.evaluator import aggregate_by_family, evaluate_expression
+from llm_binpack.evaluator import evaluate_expression
 from llm_binpack.orlib import parse_orlib_text
 from llm_binpack.paired import compare_to_best_fit
 from llm_binpack.proposers import DeterministicProposer, Elite
 from llm_binpack.search import SearchEngine
-
 
 ORLIB_URLS = {
     "binpack1.txt": "https://people.brunel.ac.uk/~mastjjb/jeb/orlib/files/binpack1.txt",
@@ -54,15 +54,14 @@ def download_text(filename: str) -> tuple[str, str]:
         try:
             with urllib.request.urlopen(url, timeout=30) as response:
                 return response.read().decode("utf-8"), url
-        except Exception as exc:
+        except (urllib.error.URLError, OSError, TimeoutError, UnicodeDecodeError) as exc:
             errors.append(f"{url}: {exc}")
     raise RuntimeError(f"could not download {filename}: " + " | ".join(errors))
 
 
 def select_on_validation(search, validation):
     scored = [
-        evaluate_expression(candidate.expression, validation)
-        for candidate in search.population
+        evaluate_expression(candidate.expression, validation) for candidate in search.population
     ]
     return max(scored, key=lambda result: result.fitness), scored
 

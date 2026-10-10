@@ -53,8 +53,8 @@ def _exact_two_sided_sign_pvalue(wins: int, losses: int) -> float:
 def _percentile(values: list[float], probability: float) -> float:
     ordered = sorted(values)
     position = probability * (len(ordered) - 1)
-    lower = int(math.floor(position))
-    upper = int(math.ceil(position))
+    lower = math.floor(position)
+    upper = math.ceil(position)
     if lower == upper:
         return ordered[lower]
     weight = position - lower
@@ -72,10 +72,7 @@ def _paired_bootstrap_ci(
 
     rng = random.Random(seed)
     n = len(deltas)
-    means = [
-        fmean(deltas[rng.randrange(n)] for _ in range(n))
-        for _ in range(resamples)
-    ]
+    means = [fmean(deltas[rng.randrange(n)] for _ in range(n)) for _ in range(resamples)]
     return (_percentile(means, 0.025), _percentile(means, 0.975))
 
 

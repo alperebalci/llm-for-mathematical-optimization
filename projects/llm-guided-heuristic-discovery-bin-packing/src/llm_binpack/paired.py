@@ -72,10 +72,7 @@ def _paired_bootstrap_ci(
 
     rng = random.Random(seed)
     n = len(deltas)
-    means = [
-        fmean(deltas[rng.randrange(n)] for _ in range(n))
-        for _ in range(resamples)
-    ]
+    means = [fmean(deltas[rng.randrange(n)] for _ in range(n)) for _ in range(resamples)]
     return (_percentile(means, 0.025), _percentile(means, 0.975))
 
 

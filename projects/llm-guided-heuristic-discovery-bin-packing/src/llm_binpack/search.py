@@ -223,7 +223,7 @@ class SearchEngine:
                 except ProposalBudgetExceeded:
                     primary_disabled = True
                     proposal_budget_exhaustions += 1
-                except Exception:
+                except Exception:  # noqa: BLE001 - provider failure triggers fallback
                     proposal_failures += 1
 
             if len(proposals) < self.proposals_per_generation:

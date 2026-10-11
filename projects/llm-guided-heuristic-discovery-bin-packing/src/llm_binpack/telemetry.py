@@ -37,8 +37,7 @@ class TokenPricing:
         assert self.input_usd_per_million is not None
         assert self.output_usd_per_million is not None
         return (
-            input_tokens * self.input_usd_per_million
-            + output_tokens * self.output_usd_per_million
+            input_tokens * self.input_usd_per_million + output_tokens * self.output_usd_per_million
         ) / 1_000_000
 
     def as_dict(self) -> dict[str, float | None]:

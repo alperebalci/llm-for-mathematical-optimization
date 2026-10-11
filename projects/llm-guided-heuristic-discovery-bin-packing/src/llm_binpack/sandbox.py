@@ -84,9 +84,7 @@ def evaluate_expression_isolated(
         process.terminate()
         process.join()
         receive_connection.close()
-        raise SandboxTimeout(
-            f"candidate evaluation exceeded {timeout_seconds:.3f} seconds"
-        )
+        raise SandboxTimeout(f"candidate evaluation exceeded {timeout_seconds:.3f} seconds")
 
     elapsed = perf_counter() - started
     if not receive_connection.poll():

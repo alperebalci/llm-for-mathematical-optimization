@@ -262,9 +262,7 @@ def _discover(args: argparse.Namespace) -> int:
         "validation_selected": selection.validation_evaluation.as_dict(),
         "failed_validation_evaluations": selection.failed_validation_evaluations,
         "final_holdout": final_evaluation.as_dict(),
-        "final_holdout_paired_vs_best_fit": compare_to_best_fit(
-            final_evaluation
-        ).as_dict(),
+        "final_holdout_paired_vs_best_fit": compare_to_best_fit(final_evaluation).as_dict(),
         "final_holdout_by_family": aggregate_by_family(final_evaluation),
         "baselines": {
             "classical": _classical_baselines(final_holdout),

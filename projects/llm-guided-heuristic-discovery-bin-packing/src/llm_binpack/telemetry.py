@@ -188,9 +188,7 @@ class UsageLedger:
         success: bool,
         error: str | None = None,
     ) -> None:
-        resolved_total = (
-            input_tokens + output_tokens if total_tokens is None else total_tokens
-        )
+        resolved_total = input_tokens + output_tokens if total_tokens is None else total_tokens
         values = (
             input_tokens,
             cached_input_tokens,
@@ -248,12 +246,8 @@ class UsageLedger:
             cached_input_tokens=cached_tokens,
             output_tokens=output_tokens,
             total_tokens=total_tokens,
-            requested_proposals=sum(
-                record.requested_proposals for record in self._records
-            ),
-            returned_proposals=sum(
-                record.returned_proposals for record in self._records
-            ),
+            requested_proposals=sum(record.requested_proposals for record in self._records),
+            returned_proposals=sum(record.returned_proposals for record in self._records),
             latency_seconds=sum(record.latency_seconds for record in self._records),
             estimated_cost_usd=estimated_cost,
             budget=self.budget,

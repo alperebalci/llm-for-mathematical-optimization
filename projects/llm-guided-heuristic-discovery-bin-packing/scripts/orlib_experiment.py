@@ -7,7 +7,7 @@ import json
 import urllib.request
 from pathlib import Path
 
-from llm_binpack.evaluator import aggregate_by_family, evaluate_expression
+from llm_binpack.evaluator import evaluate_expression
 from llm_binpack.orlib import parse_orlib_text
 from llm_binpack.paired import compare_to_best_fit
 from llm_binpack.proposers import DeterministicProposer, Elite

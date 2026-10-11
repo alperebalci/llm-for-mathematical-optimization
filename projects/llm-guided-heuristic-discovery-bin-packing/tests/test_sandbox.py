@@ -36,7 +36,7 @@ def test_isolated_evaluation_enforces_wall_clock_timeout() -> None:
 def test_isolated_evaluation_contains_runtime_failure() -> None:
     suite = make_suite(base_seed=46, instances_per_family=1, n_items=25)
 
-    with pytest.raises(SandboxEvaluationError, match="ZeroDivisionError"):
+    with pytest.raises(SandboxEvaluationError, match="ValueError: expression failed numerically"):
         evaluate_expression_isolated(
             "1 / (residual - residual)",
             suite,

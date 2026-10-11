@@ -2,7 +2,6 @@ import pytest
 
 from llm_binpack.expressions import UnsafeExpression, compile_expression
 
-
 CONTEXT = {
     "item": 0.4,
     "capacity": 1.0,

@@ -44,9 +44,7 @@ def parse_orlib_text(text: str, *, source: str = "or-library") -> tuple[Benchmar
 
     for index in range(expected_instances):
         if cursor >= len(lines):
-            raise ORLibraryFormatError(
-                f"unexpected end of file before instance {index + 1}"
-            )
+            raise ORLibraryFormatError(f"unexpected end of file before instance {index + 1}")
 
         name = lines[cursor]
         cursor += 1
@@ -66,9 +64,7 @@ def parse_orlib_text(text: str, *, source: str = "or-library") -> tuple[Benchmar
             item_count = int(header[1])
             reference_optimum = int(header[2])
         except ValueError as exc:
-            raise ORLibraryFormatError(
-                f"instance {name!r} has a non-numeric header"
-            ) from exc
+            raise ORLibraryFormatError(f"instance {name!r} has a non-numeric header") from exc
 
         if item_count <= 0:
             raise ORLibraryFormatError(f"instance {name!r} has no items")
@@ -81,9 +77,7 @@ def parse_orlib_text(text: str, *, source: str = "or-library") -> tuple[Benchmar
         try:
             items = tuple(float(lines[cursor + offset]) for offset in range(item_count))
         except ValueError as exc:
-            raise ORLibraryFormatError(
-                f"instance {name!r} contains a non-numeric item"
-            ) from exc
+            raise ORLibraryFormatError(f"instance {name!r} contains a non-numeric item") from exc
         cursor += item_count
 
         instance = BinPackingInstance(

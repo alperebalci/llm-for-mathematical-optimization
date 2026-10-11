@@ -7,7 +7,6 @@ import math
 from collections.abc import Mapping
 from dataclasses import dataclass
 
-
 ALLOWED_VARIABLES = {
     "item",
     "capacity",

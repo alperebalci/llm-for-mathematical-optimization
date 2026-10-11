@@ -17,7 +17,6 @@ from .sandbox import (
 )
 from .telemetry import ProposalBudgetExceeded
 
-
 SEED_EXPRESSIONS = (
     "-residual",
     "-(residual ** 2)",
